@@ -1,0 +1,115 @@
+$success: #52C41A;
+$info-color: #1890FF;
+
+.header {
+    margin-bottom: 26px;
+    height: 80px;
+    padding: 0 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+
+    .header_link {
+        text-decoration: none;
+        color: black;
+    }
+
+    .header_title {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .header_buttons {
+        .header_sign-in {
+            margin-right: 6px;
+            border: none;
+            border-radius: 5px;
+            width: 109px;
+            height: 51px;
+            font-family: Inter;
+            font-weight: 400;
+            background-color: white;
+            transition-duration: 100ms;
+        }
+
+        .header_sign-in:hover {
+            border: 1px solid $info-color;
+            color: white;
+            background-color: $info-color;
+        }
+
+        .header_sign-up {
+            border: 1px solid $success;
+            border-radius: 5px;
+            width: 109px;
+            height: 51px;
+            font-family: Inter;
+            color: $success;
+            background-color: white;
+            transition-duration: 100ms;
+        }
+
+        .header_sign-up:hover {
+            color: white;
+            background-color: $success;
+        }
+    }
+
+    .header_user {
+        display: flex;
+        align-items: center;
+
+        .header_create-article {
+            margin-right: 27px;
+            border: 1px solid $success;
+            border-radius: 5px;
+            width: 109px;
+            height: 31px;
+            font-family: Inter;
+            color: $success;
+            background-color: white;
+            transition-duration: 100ms;
+        }
+
+        .header_create-article:hover {
+            color: white;
+            background-color: $success;
+        }
+
+        .header_profile {
+            display: flex;
+            align-items: center;
+            color: #000;
+            text-decoration: none;
+
+            .header_username {
+                margin-right: 13px;
+            }
+
+            .header_user-pic {
+                width: 57px;
+                height: 57px;
+                margin-right: 27px;
+                border-radius: 50%;
+            }
+        }
+
+        .header_log-out {
+            width: 109px;
+            height: 51px;
+            border: 1px solid #000000BF;
+            border-radius: 5px;
+            font-family: Inter;
+            color: #000000BF;
+            background-color: white;
+            transition-duration: 100ms;
+        }
+
+        .header_log-out:hover {
+            border: 1px solid #000000BF;
+            color: white;
+            background-color: #000000BF;
+        }
+    }
+}

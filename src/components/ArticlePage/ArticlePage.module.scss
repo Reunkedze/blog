@@ -1,0 +1,110 @@
+.article {
+    width: 941px;
+    margin: auto;
+    margin-bottom: 26px;
+    border-radius: 2px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #00000026;
+    display: flex;
+    justify-content: space-between;
+    overflow-wrap: break-word;
+
+    .article_left-part {
+        max-width: 682px;
+
+        .article_title {
+            p {
+                max-width: 655px;
+                margin-right: 14px;
+            }
+
+            display: flex;
+            align-items: center;
+            margin: 0;
+            margin-right: 12px;
+            font-size: 20px;
+            font-weight: 400;
+            color: #1890FF;
+        }
+
+        .article_like {
+            margin-right: 5px;
+            position: relative;
+            top: 3px;
+        }
+
+        .article_tags {
+            margin-top: 12px;
+            overflow-wrap: break-word;
+            line-height: 30px;
+
+            .article_tag {
+                margin-right: 8px;
+                border: 1px solid black;
+                padding: 4px 6px;
+                font-size: 12px;
+                border-radius: 2px;
+            }
+        }
+
+        .article_text {
+            color: #00000080;
+        }
+    }
+
+    .article_right-part {
+        height: 50px;
+        display: flex;
+        flex-direction: column;
+
+        .article_info {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+
+            .article_info-text {
+                margin-right: 12px;
+                display: flex;
+                flex-direction: column;
+
+                .article_author {
+                    font-size: 18px;
+                }
+
+                .article_date {
+                    font-size: 12px;
+                }
+            }
+
+            .article_author-photo {
+                width: 57px;
+                height: 57px;
+                border-radius: 50%;
+            }
+        }
+
+        .article_buttons {
+
+            .article_delete {
+                width: 78px;
+                height: 32px;
+                margin-right: 12px;
+                border: 1px solid #F5222D;
+                border-radius: 5px;
+                color: #F5222D;
+                background-color: white;
+            }
+
+            .article_edit {
+                width: 66px;
+                height: 32px;
+                margin-right: 12px;
+                border: 1px solid #52C41A;
+                border-radius: 5px;
+                color: #52C41A;
+                background-color: white;
+            }
+        }
+    }
+}

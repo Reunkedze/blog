@@ -1,0 +1,121 @@
+.new-article {
+    width: 938px;
+    margin: auto;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #00000026;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .new-article_form {
+        width: 874px;
+
+        .new-article_field {
+            margin-bottom: 12px;
+
+            .new-article_label {
+                margin-bottom: 6px;
+            }
+
+            input {
+                width: 100%;
+                height: 40px;
+                outline: none;
+                border: 1px solid #00000026;
+                padding: 1px 12px;
+                box-sizing: border-box;
+                font-size: 16px;
+            }
+
+            textarea {
+                width: 100%;
+                height: 168px;
+                border: 1px solid #00000026;
+                box-sizing: border-box;
+                padding: 10px 12px;
+                font-size: 16px;
+                font-family: Inter;
+                outline: none;
+                resize: none;
+            }
+        }
+
+        .new-article_tags {
+            margin-bottom: 12px;
+
+            .new-article_label {
+                margin-bottom: 12px;
+            }
+
+            .new-article_new-tag,
+            .new-article_tag {
+                display: flex;
+
+                input,
+                .new-article_tag-value {
+                    width: 300px;
+                    height: 40px;
+                    margin-right: 17px;
+                    outline: none;
+                    border: 1px solid #00000026;
+                    padding: 1px 12px;
+                    box-sizing: border-box;
+                    font-size: 16px;
+                }
+
+                .new-article_tag-value {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .new-article_delete-tag {
+                    width: 120px;
+                    height: 40px;
+                    margin-right: 17px;
+                    border: 1px solid #F5222D;
+                    border-radius: 4px;
+                    font-family: Inter;
+                    color: #F5222D;
+                    background-color: white;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .new-article_add-tag {
+                    width: 136px;
+                    height: 40px;
+                    border: 1px solid #1890FF;
+                    border-radius: 4px;
+                    font-family: Inter;
+                    color: #1890FF;
+                    background-color: white;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            .new-article_new-tag {
+                margin-bottom: 20px;
+            }
+
+            .new-article_tag {
+                margin-bottom: 10px;
+            }
+        }
+
+        .new-article_submit {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 48px;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            background-color: #1890FF;
+        }
+    }
+
+}
