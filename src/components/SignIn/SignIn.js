@@ -61,7 +61,7 @@ function SignIn({ userInfo, errorsData, asyncLogin }) {
                     <label>
                         <div className={classes['sign-in_label']}>Password</div>
                         {/* include validation with required or other standard HTML validation rules */}
-                        <input className={(errors.password || errorsData.authorizationError) ? classes['sign-in_error-input'] : null} type="password" {...register("password", { required: true, minLength: 4, maxLength: 40 })} />
+                        <input className={(errors.password || errorsData.authorizationError) ? classes['sign-in_error-input'] : null} type="password" {...register("password", { required: true, minLength: 6, maxLength: 40 })} />
                     </label>
                 </div>
 

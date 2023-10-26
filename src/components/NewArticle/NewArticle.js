@@ -76,6 +76,8 @@ function NewArticle({ userInfo, newArticle, onTitleFieldChange, onDescriptionFie
                         </label>
                     </div>
 
+                    {errors.title && <span>This field is required</span>}
+
                     <div className={classes['new-article_field']}>
                         <label>
                             <div className={classes['new-article_label']}>Short description</div>
@@ -84,6 +86,8 @@ function NewArticle({ userInfo, newArticle, onTitleFieldChange, onDescriptionFie
                         </label>
                     </div>
 
+                    {errors.description && <span>This field is required</span>}
+
                     <div className={classes['new-article_field']}>
                         <label>
                             <div className={classes['new-article_label']}>Text</div>
@@ -91,6 +95,8 @@ function NewArticle({ userInfo, newArticle, onTitleFieldChange, onDescriptionFie
                             <textarea {...register("body", { required: true })} onChange={event => onTextFieldChange(event.target.value)} defaultValue={!slug ? (newArticle ? newArticle.textField : '') : null} />
                         </label>
                     </div>
+
+                    {errors.body && <span>This field is required</span>}
 
                     <div className={classes['new-article_tags']}>
                         <label>
@@ -114,8 +120,6 @@ function NewArticle({ userInfo, newArticle, onTitleFieldChange, onDescriptionFie
                         </label>
                     </div>
 
-                    {/* errors will return when field validation fails  */}
-                    {errors.exampleRequired && <span>This field is required</span>}
 
                     <input className={classes['new-article_submit']} type="submit" />
 

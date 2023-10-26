@@ -7,9 +7,12 @@ import * as actions from '../../actions'
 import { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min'
+import attention from '../../img/vector.png'
 
 function ArticlePage({ info, userInfo, asyncGetArticle, asyncGetArticleWithAuth, asyncLikePost, asyncUnlikePost, slug }) {
     const [creationInProcess, setCreationInProcess] = useState('in process')
+    const [popup, setPopup] = useState([classes['article_delete-popup'], classes['article_delete-popup__hidden']])
+
 
     useEffect(() => {
         userInfo ? asyncGetArticleWithAuth(slug, userInfo.user.token) : asyncGetArticle(slug)
@@ -72,10 +75,20 @@ function ArticlePage({ info, userInfo, asyncGetArticle, asyncGetArticleWithAuth,
                             <img className={classes['article_author-photo']} src={info.author.image} alt='author' />
                         </div>
                         {userInfo && (userInfo.user.username === info.author.username) ? <div className={classes['article_buttons']}>
-                            <button className={classes['article_delete']} onClick={() => {
-                                deleteArticle(info.slug, userInfo.user.token)
-                                setCreationInProcess('delete')
-                            }}>Delete</button>
+                            <button className={classes['article_delete']} onClick={() => setPopup([classes['article_delete-popup']])}>Delete</button>
+                            <div className={popup.join(' ')}>
+                                <div className={classes['article_delete-popup-header']}>
+                                    <img className={classes['article_popup-attention']} src={attention} alt='attention' />
+                                    <div>Are you sure to delete this article?</div>
+                                </div>
+                                <div className={classes['article_delete-popup-footer']}>
+                                    <button className={classes['article_popup-no']} onClick={() => setPopup([classes['article_delete-popup'], classes['article_delete-popup__hidden']])}>No</button>
+                                    <button className={classes['article_popup-yes']} onClick={() => {
+                                        deleteArticle(info.slug, userInfo.user.token)
+                                        setCreationInProcess('delete')
+                                    }}>Yes</button>
+                                </div>
+                            </div>
                             <button className={classes['article_edit']} onClick={() => setCreationInProcess('edit')}>Edit</button>
                         </div> : null}
                     </div>
