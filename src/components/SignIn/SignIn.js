@@ -3,8 +3,16 @@ import { useForm } from "react-hook-form"
 import { Link, Redirect } from 'react-router-dom/cjs/react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../../actions'
+import { useEffect } from 'react'
 
-function SignIn({ userInfo, errorsData, asyncLogin }) {
+function SignIn({ userInfo, errorsData, asyncLogin, deleteFetchError }) {
+
+    useEffect(() => {
+        const asyncDeleteError = async () => {
+            deleteFetchError()
+        }
+        asyncDeleteError()
+    }, [deleteFetchError])
 
     const {
         register,

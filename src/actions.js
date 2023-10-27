@@ -1,21 +1,53 @@
+const addError = (errorInfo) => ({ type: 'FETCH_ERROR', errorInfo })
+
+export const deleteFetchError = () => ({ type: 'DELETE_FETCH_ERROR' })
+
 const addArticles = (articles) => ({ type: 'ADD_ARTICLES', articles })
 
 export const asyncAddArticles = (page) => {
-    return (dispatch) => fetch(`https://blog.kata.academy/api/articles?limit=5&offset=${page * 5 - 5}`).then(r => r.json()).then(d => dispatch(addArticles(d)))
+    return (dispatch) => fetch(`https://blog.kata.academy/api/articles?limit=5&offset=${page * 5 - 5}`).then(r => r.json()).then(d => {
+        if (!d.errors) {
+            dispatch(deleteFetchError())
+            dispatch(addArticles(d))
+        } else {
+            dispatch(addError(d.errors))
+        }
+    }).catch(e => console.error(e))
 }
 
 export const asyncAddArticlesWithAuth = (page, token) => {
-    return (dispatch) => fetch(`https://blog.kata.academy/api/articles?limit=5&offset=${page * 5 - 5}`, { headers: { "Authorization": 'Bearer ' + token } }).then(r => r.json()).then(d => dispatch(addArticles(d)))
+    return (dispatch) => fetch(`https://blog.kata.academy/api/articles?limit=5&offset=${page * 5 - 5}`, { headers: { "Authorization": 'Bearer ' + token } }).then(r => r.json()).then(d => {
+        if (!d.errors) {
+            dispatch(deleteFetchError())
+            dispatch(addArticles(d))
+        } else {
+            dispatch(addError(d.errors))
+        }
+    }).catch(e => console.error(e))
 }
 
 const getArticle = (article) => ({ type: 'ADD_ARTICLE', article })
 
 export const asyncGetArticle = (slug) => {
-    return (dispatch) => fetch(`https://blog.kata.academy/api/articles/${slug}`).then(r => r.json()).then(d => dispatch(getArticle(d.article)))
+    return (dispatch) => fetch(`https://blog.kata.academy/api/articles/${slug}`).then(r => r.json()).then(d => {
+        if (!d.errors) {
+            dispatch(deleteFetchError())
+            dispatch(getArticle(d.article))
+        } else {
+            dispatch(addError(d.errors))
+        }
+    }).catch(e => console.error(e))
 }
 
 export const asyncGetArticleWithAuth = (slug, token) => {
-    return (dispatch) => fetch(`https://blog.kata.academy/api/articles/${slug}`, { headers: { "Authorization": 'Bearer ' + token } }).then(r => r.json()).then(d => dispatch(getArticle(d.article)))
+    return (dispatch) => fetch(`https://blog.kata.academy/api/articles/${slug}`, { headers: { "Authorization": 'Bearer ' + token } }).then(r => r.json()).then(d => {
+        if (!d.errors) {
+            dispatch(deleteFetchError())
+            dispatch(getArticle(d.article))
+        } else {
+            dispatch(addError(d.errors))
+        }
+    }).catch(e => console.error(e))
 }
 
 export const onPageChange = (page) => ({ type: 'ON_PAGE_CHANGE', page })
@@ -44,7 +76,7 @@ export const asyncSignUp = (userInfo) => {
             } else {
                 dispatch(signUpError(d.errors))
             }
-        })
+        }).catch(e => console.error(e))
     }
 }
 
@@ -67,13 +99,19 @@ export const asyncUpdateProfile = (updates, token) => {
                     "image": updates.image
                 }
             })
-        }).then(r => r.json()).then(d => dispatch(updateProfile(d)))
+        }).then(r => r.json()).then(d => {
+            if (d.user) {
+                dispatch(updateProfile(d))
+            } else {
+                dispatch(signUpError(d.errors))
+            }
+        }).catch(e => console.error(e))
     }
 }
 
 export const login = (userInfo) => ({ type: 'LOGIN', userInfo })
 
-export const loginError = (userInfo) => ({ type: 'LOGIN_ERROR' })
+export const loginError = () => ({ type: 'LOGIN_ERROR' })
 
 export const asyncLogin = (userInfo) => {
     return (dispatch) => {
@@ -97,7 +135,7 @@ export const asyncLogin = (userInfo) => {
             } else {
                 dispatch(loginError())
             }
-        })
+        }).catch(e => console.error(e))
     }
 }
 
@@ -128,7 +166,14 @@ export const asyncLikePost = (slug, token) => {
             headers: {
                 "Authorization": 'Bearer ' + token
             }
-        }).then(r => r.json()).then(d => dispatch(likePost(d)))
+        }).then(r => r.json()).then(d => {
+            if (!d.errors) {
+                dispatch(deleteFetchError())
+                dispatch(likePost(d))
+            } else {
+                dispatch(addError(d.errors))
+            }
+        }).catch(e => console.error(e))
     }
 }
 
@@ -141,6 +186,13 @@ export const asyncUnlikePost = (slug, token) => {
             headers: {
                 "Authorization": 'Bearer ' + token
             }
-        }).then(r => r.json()).then(d => dispatch(unlikePost(d)))
+        }).then(r => r.json()).then(d => {
+            if (!d.errors) {
+                dispatch(deleteFetchError())
+                dispatch(unlikePost(d))
+            } else {
+                dispatch(addError(d.errors))
+            }
+        }).catch(e => console.error(e))
     }
 }

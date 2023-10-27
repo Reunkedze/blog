@@ -9,9 +9,10 @@ import SignIn from '../SignIn/SignIn'
 import SignUp from '../SignUp'
 import Profile from '../Profile'
 import NewArticle from '../NewArticle'
+import ErrorMessage from '../ErrorMessage'
 
 
-function Main({ articles, page, onPageChange }) {
+function Main({ articles, page, errorsData, onPageChange }) {
     return (
         <main className={classes['main']}>
             <Route path={['/', '/articles']} render={() => {
@@ -26,7 +27,11 @@ function Main({ articles, page, onPageChange }) {
             }} exact />
             <Route path='/articles/:slug' render={({ match }) => {
                 const { slug } = match.params
-                return <ArticlePage slug={slug} />
+                if (!errorsData.fetchError) {
+                    return <ArticlePage slug={slug} />
+                } else {
+                    return <main className={classes['main']}><ErrorMessage /></main>
+                }
             }} exact />
             <Route path='/sign-in' component={SignIn} />
             <Route path='/sign-up' component={SignUp} />
@@ -40,6 +45,6 @@ function Main({ articles, page, onPageChange }) {
     )
 }
 
-const mapStateToProps = (state) => ({ articles: state.articles, page: state.page })
+const mapStateToProps = (state) => ({ articles: state.articles, page: state.page, errorsData: state.errorsData })
 
 export default connect(mapStateToProps, actions)(Main)

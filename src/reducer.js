@@ -1,7 +1,11 @@
-const initialState = { articles: null, article: null, page: 1, userInfo: null, newArticle: { tags: [] }, isLoading: false, errorsData: { authorizationError: false, signUpData: false } }
+const initialState = { articles: null, article: null, page: 1, userInfo: null, newArticle: { tags: [] }, isLoading: false, errorsData: { authorizationError: false, signUpData: false, fetchError: false } }
 
 function Reducer(state = initialState, action) {
     switch (action.type) {
+        case 'FETCH_ERROR':
+            return { ...state, errorsData: { ...state.errorsData, fetchError: action.errorInfo } }
+        case 'DELETE_FETCH_ERROR':
+            return { ...state, errorsData: { ...state.errorsData, fetchError: false } }
         case 'ADD_ARTICLES':
             return { ...state, articles: action.articles }
         case 'ADD_ARTICLE':
@@ -11,13 +15,13 @@ function Reducer(state = initialState, action) {
         case 'SIGN_UP':
             return { ...state, userInfo: action.userInfo, errorsData: { signUpError: false } }
         case 'SIGN_UP_ERROR':
-            return { ...state, errorsData: { signUpError: action.errorInfo } }
+            return { ...state, errorsData: { ...state.errorsData, signUpError: action.errorInfo } }
         case 'UPDATE_PROFILE':
             return { ...state, userInfo: { ...state.userInfo, ...action.updates } }
         case 'LOGIN':
-            return { ...state, userInfo: action.userInfo, errorsData: { authorizationError: false } }
+            return { ...state, userInfo: action.userInfo, errorsData: { ...state.errorsData, authorizationError: false } }
         case 'LOGIN_ERROR':
-            return { ...state, errorsData: { authorizationError: true } }
+            return { ...state, errorsData: { ...state.errorsData, authorizationError: true } }
         case 'LOG_OUT':
             return { ...state, userInfo: null }
         case 'ON_TITLE_FIELD_CHANGE':
